@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace Algos.Lib
 {
     public class Helpers
@@ -6,7 +9,7 @@ namespace Algos.Lib
         {
             var t = vs[j];
             vs[j] = vs[i];
-            vs[i] = vs[j];
+            vs[i] = t;
         }
 
         public static T[] Copy<T>(T[] vs)
@@ -16,7 +19,7 @@ namespace Algos.Lib
             return res;
         }
 
-        public static int[] Random(int seed, int maxLength, int minValue, int maxValue)
+        public static string RandomIntArray(int seed, int maxLength, int minValue, int maxValue)
         {
             var rnd = new System.Random(seed);
 
@@ -28,7 +31,17 @@ namespace Algos.Lib
                 res[i] = minValue + (int) (rnd.NextDouble() * (maxValue - minValue));
             }
 
-            return res;
+            return String.Join(" ", res);
+        }
+
+        public static int[] StringToIntArray(string sv)
+        {
+            return sv.Split(new char[]{}, StringSplitOptions.RemoveEmptyEntries).Select(v => System.Int32.Parse(v)).ToArray();
+        }
+        
+        public static string IntArrayToString(int[] vs)
+        {
+            return String.Join(" ", vs);
         }
     }
 }
